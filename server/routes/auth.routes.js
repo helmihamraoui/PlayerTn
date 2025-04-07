@@ -1,5 +1,5 @@
 import express from 'express';
-import { registerUser, loginUser, updateUser, verifyToken, logoutUser, getAllUsers, getAllUsersAdmin, deleteUserAdmin, countAllUsersAdmin, getUserById } from '../controllers/authController.js';
+import { registerUser, loginUser, updateUser, verifyToken, logoutUser, getAllUsers, deleteUserAdmin, getUserById, getAllOwners } from '../controllers/authController.js';
 import authenticateToken from '../middlewares/authMiddleware.js'; // Assuming you have authentication middleware
 
 const router = express.Router();
@@ -13,7 +13,7 @@ router.put('/users/:id', authenticateToken, updateUser);
 // Get all users 
 router.get('/users', authenticateToken, getAllUsers);
 
-router.get('/admin', authenticateToken, getAllUsersAdmin);
+router.get('/owners', authenticateToken, getAllOwners);
 // Verify a token (protected route)
 router.get('/verify', authenticateToken, verifyToken);
 // Logout a user (client-side action)

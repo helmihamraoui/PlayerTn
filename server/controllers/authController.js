@@ -81,23 +81,18 @@ export const getUserById = async (req, res) => {
 };
 
 
-// Get all users (Admins only)
-export const getAllUsersAdmin = async (req, res) => {
+// Get all owners
+export const getAllOwners = async (req, res) => {
     try {
-        // Check if the requesting user is an admin
-        if (req.user.role !== 'admin') {
-            return res.status(403).json({ message: "Access denied. Admins only." });
-        }
-
         // Fetch all users from the database
-        const users = await User.find();
+        const users = await User.find({ role: 'owner' }); // Adjust the query to filter by role
         if (!users) return res.status(404).json({ error: 'No users found' });
 
         res.status(200).json(users);
     } catch (err) {
         res.status(500).json({ error: 'Failed to fetch users', details: err.message });
     }
-};
+}
 
 // Update user data
 export const updateUser = async (req, res) => {

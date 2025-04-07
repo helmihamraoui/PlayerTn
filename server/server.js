@@ -6,6 +6,8 @@ import cors from 'cors';
 import http from 'http'; // Import HTTP module to create server
 import msgRouter from './routes/chat.routes.js';
 import multer from 'multer';
+import ownerRoutes from './routes/owner.routes.js'; // Import owner routes
+import terrainRoutes from './routes/terrain.routes.js'; // Import terrain routes
 dotenv.config(); // Load environment variables
 
 const app = express();
@@ -20,16 +22,17 @@ app.use(express.json(), cors()); // Parse JSON requests
 dbConnect();
 
 // Routes
-app.use('/api', authRoutes, Router, msgRouter); // Authentication, Recipe, and Chat routes
-
+app.use('/api', authRoutes, Router, msgRouter); 
+app.use('/api', ownerRoutes); // Ensure ownerRoutes is imported and used
+app.use('/api', terrainRoutes);
 app.use('/uploads', express.static('public/uploads'));
 console.log(`you are On server side port: ${PORT}`);
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination: function (_, __, cb) { // Removed unused parameters
         cb(null, 'public/uploads/');
     },
-    filename: function (req, file, cb) {
+    filename: function (_, file, cb) { // Removed unused 'req' parameter
         cb(null, file.originalname);
     },
 });
@@ -38,12 +41,12 @@ const upload = multer({ storage: storage });
 
 app.post('/api/upload', upload.single('sticker'), (req, res) => {
     if (!req.file) {
-        return res.status(400).send('No file uploaded.');
+        return res.status(400).json({ error: 'No file uploaded.' });
     }
 
     console.log(`File uploaded: ${req.file.filename}`);
     const filePath = req.file.path.replace('public/', '');
-    res.status(200).send({ filePath });
+    res.status(200).json({ filePath }); // Ensure consistent JSON response
 });
 
 // Start the server
