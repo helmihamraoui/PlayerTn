@@ -29,8 +29,8 @@ const UserSchema = new mongoose.Schema(
         },
         role: {
             type: String,
-            enum: ['player', 'owner', 'admin'], // Changed 'owner'
-            default: 'player',  // Default to 'user', but can be changed to 'admin' or Owner
+            enum: ['user','player', 'owner', 'admin'], // Changed 'owner'
+            default: 'user',  // Default to 'user', but can be changed to 'admin' or Owner
         },
     },
     { timestamps: true }

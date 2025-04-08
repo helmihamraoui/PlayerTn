@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+    addPlayerInfo,
   getPlayerProfile,
   updatePlayerProfile,
   viewOtherPlayer
@@ -7,6 +8,8 @@ import {
 
 const router = express.Router();
 
+// Add player information route (after registration)
+router.post('/addPlayerInfo/:userId', addPlayerInfo);
 // Get the profile of the logged-in player
 router.get('/player/profile/:userId', getPlayerProfile);
 
