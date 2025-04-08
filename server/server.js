@@ -8,6 +8,9 @@ import msgRouter from './routes/chat.routes.js';
 import multer from 'multer';
 import ownerRoutes from './routes/owner.routes.js'; // Import owner routes
 import terrainRoutes from './routes/terrain.routes.js'; // Import terrain routes
+import bookingRoutes from './routes/booking.routes.js';
+import chatRoutes from './routes/chat.routes.js';
+import playerRoutes from './routes/player.routes.js'; // Import player routes
 dotenv.config(); // Load environment variables
 
 const app = express();
@@ -22,9 +25,13 @@ app.use(express.json(), cors()); // Parse JSON requests
 dbConnect();
 
 // Routes
-app.use('/api', authRoutes, Router, msgRouter); 
-app.use('/api', ownerRoutes); // Ensure ownerRoutes is imported and used
-app.use('/api', terrainRoutes);
+app.use('/api', authRoutes); // Authentication routes
+app.use('/api', msgRouter); // Chat routes
+app.use('/api', ownerRoutes); // Owner routes
+app.use('/api', terrainRoutes); // Terrain routes
+app.use('/api', bookingRoutes);// Booking routes
+app.use('/api', chatRoutes);// Chat routes
+app.use('/api', playerRoutes);// Player routes
 app.use('/uploads', express.static('public/uploads'));
 console.log(`you are On server side port: ${PORT}`);
 

@@ -4,6 +4,7 @@ import Terrain from '../models/terrain.model.js';
 // Add Owner (by admin)
 export const addOwner = async (req, res) => {
   try {
+    
     const newOwner = new Owner(req.body);
     const savedOwner = await newOwner.save();
     res.status(201).json(savedOwner);
