@@ -90,8 +90,12 @@
                 "glob": "**/*",
                 "input": "public"
               }
-            ],
+              ],
             "styles": [
+              "node_modules/primeicons/primeicons.css",
+              "@angular/material/prebuilt-themes/azure-blue.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/animate.css/animate.min.css",
               "src/styles.css"
             ],
             "scripts": []

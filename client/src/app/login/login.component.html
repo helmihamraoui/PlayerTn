@@ -1,1 +1,27 @@
-<p>login works!</p>
+<div class="background">
+
+  <div class="wrapper">
+    <form (submit)="onLogin($event)">
+      <h2>Login</h2>
+      <div class="input-field">
+        <input type="text" required [(ngModel)]="email" name="email" />
+        <label>Enter your email</label>
+      </div>
+      <div class="input-field">
+        <input type="password" required [(ngModel)]="password" name="password" />
+        <label>Enter your password</label>
+      </div>
+      <div class="forget">
+        <label for="remember">
+          <input type="checkbox" id="remember" [(ngModel)]="rememberMe" name="remember" />
+          <p>Remember me</p>
+        </label>
+        <a href="#">Forgot password?</a>
+      </div>
+      <button type="submit">Log In</button>
+      <div class="register">
+        <p>Don't have an account? <a routerLink="/register">Register</a></p>
+      </div>
+    </form>
+  </div>
+</div>
