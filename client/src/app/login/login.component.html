@@ -1,7 +1,7 @@
 <div class="background">
 
   <div class="wrapper">
-    <form (submit)="onLogin($event)">
+    <form (submit)="onLogin($event)" method="post">
       <h2>Login</h2>
       <div class="input-field">
         <input type="text" required [(ngModel)]="email" name="email" />
@@ -12,11 +12,9 @@
         <label>Enter your password</label>
       </div>
       <div class="forget">
-        <label for="remember">
-          <input type="checkbox" id="remember" [(ngModel)]="rememberMe" name="remember" />
-          <p>Remember me</p>
-        </label>
-        <a href="#">Forgot password?</a>
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+      </div>
       </div>
       <button type="submit">Log In</button>
       <div class="register">
